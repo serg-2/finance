@@ -1,0 +1,1 @@
+I want to build a short-term prediction model for the US stock markets, focusing on the largest stocks over a 30-day investment horizon. I plan to use RSI to generate predictions.
