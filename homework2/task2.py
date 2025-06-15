@@ -115,5 +115,6 @@ print(stocks_df['growth_252d'].describe())
 print(stocks_df['Sharpe'].describe())
 
 # Additional
+print("Additional Task ====================================")
 print(stocks_df.sort_values('growth_252d', na_position='first').tail(10))
 print(stocks_df.sort_values('Sharpe', na_position='first').tail(10))
