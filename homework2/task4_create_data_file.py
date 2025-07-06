@@ -62,7 +62,7 @@ def get_parquet_step1() -> pd.DataFrame:
     historyPrices['high_minus_low_relative'] = (historyPrices.High - historyPrices.Low) / historyPrices['Close']
 
     # 30d rolling volatility : https://ycharts.com/glossary/terms/rolling_vol_30
-    historyPrices['volatility'] =   historyPrices['Close'].rolling(30).std() * np.sqrt(252)
+    historyPrices['volatility'] =   historyPrices['growth_1d'].rolling(30).std() * np.sqrt(252)
 
     # what we want to predict
     historyPrices['is_positive_growth_30d_future'] = np.where(historyPrices['growth_future_30d'] > 1, 1, 0)

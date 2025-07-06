@@ -72,7 +72,8 @@ def get_ticker(ticker: str) -> pd.DataFrame:
   
   historyPrices['Ticker'] = ticker
   historyPrices['growth_252d'] = historyPrices['Close'] / historyPrices['Close'].shift(252)
-  historyPrices['volatility'] = historyPrices['Close'].rolling(30).std() * np.sqrt(252)
+  historyPrices['growth_1d'] = historyPrices['Close'] / historyPrices['Close'].shift(1)
+  historyPrices['volatility'] = historyPrices['growth_1d'].rolling(30).std() * np.sqrt(252)
   historyPrices['Sharpe'] = (historyPrices['growth_252d'] - 0.045) / historyPrices['volatility']
   historyPrices = historyPrices.tail(1)
   return historyPrices
