@@ -1,6 +1,5 @@
-homework1/*.pickle
+*.pickle
 *.pyc
 *.brotli
-homework2/*.pickle
-homework3/*.pickle
+*.joblib
 
