@@ -99,3 +99,23 @@ def show_plt_snippet4(best_history_nn:dict):
     plt.legend()
     plt.grid(True)
     plt.show()
+
+def show_plt_snippet7(df_sim1_results:pd.DataFrame):
+    # Create the scatter plot
+    fig = px.scatter(
+        df_sim1_results.dropna(),
+        x='sim1_avg_investments_per_day',
+        y='sim1_CAGR',
+        size='sim1_growth_capital_4y',  # Use the 'size' parameter for sim1_CAGR
+        text='prediction',
+        title='Compound Annual Growth vs. Time spent (Average investments per day)',
+        labels={'sim1_capital': 'Initial Capital Requirement', 'growth_capital_4y': '4-Year Capital Growth'},
+        height=600  # <- Increase height here
+
+    )
+
+    # Update the layout to improve readability of the annotations
+    fig.update_traces(textposition='top center')
+
+    # Show the plot
+    fig.show()

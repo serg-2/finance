@@ -1,7 +1,8 @@
 import numpy as np
+import pandas as pd
 from joblib import load
 
-from task1 import load_df, load_tree
+from task1 import load_df, load_tree, save_df
 from task_snippet_3_0 import load_tree_random
 
 #2.2) [Code Snippet 6] Defining new columns with Predictions in new_df: pred7..pred10
@@ -75,5 +76,28 @@ new_df[(new_df.split=='test')&(new_df.pred10_rf_best_rule_55==1)].Date.hist()
 
 # List of ALL current predictions
 PREDICTIONS = [k for k in new_df.keys() if k.startswith('pred')]
-print(PREDICTIONS)
+#print(PREDICTIONS)
 
+# Pred 10: How many positive prediction per day (out of 33 stocks possible)
+pred10_daily_positive_count = pd.DataFrame(new_df[(new_df.split=='test')&(new_df.pred11_rf_best_rule_65==1)].groupby('Date')['pred11_rf_best_rule_65'].count())
+
+# Pred 9: How many positive prediction per day (out of 33 stocks possible)
+pred9_daily_positive_count = pd.DataFrame(new_df[(new_df.split=='test')&(new_df.pred10_rf_best_rule_55==1)].groupby('Date')['pred10_rf_best_rule_55'].count())
+
+# Unique trading days on Test (4 years)
+#print(new_df[(new_df.split=='test')].Date.nunique())
+
+#print(pred10_daily_positive_count)
+
+#FIG
+#pred10_daily_positive_count.hist()
+
+# 75% cases we have not more than 6 bets of $100
+#print(pred10_daily_positive_count.describe().T)
+
+#FIG
+#pred9_daily_positive_count.hist()
+
+#print(pred9_daily_positive_count.describe().T)
+
+save_df(new_df,"task1_snippet6.pickle")
