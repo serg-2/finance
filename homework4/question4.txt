@@ -1,0 +1,7 @@
+1) Receive best fee/'one time investment' available from my broker.
+2) Take model with average ~8 trades per day (or less if fees will be high). For manually checking all operations during day. And slowly increase number of trades to 24 for rarely checks in the future.
+3) Invest everything proportionally strong future growth. Not exceeding number of trades. And not exceeding optimal fee.
+4) 'Everything' means some quantity for this level of trust to model.
+5) Mark model with level of trust score.
+6) Slowly increase level of trust and increase overall investment value.
+
