@@ -1,5 +1,5 @@
 import pandas as pd
-from task1 import load_df
+from task_snippet_0 import load_df
 
 from task1_figures import show_fig_1_3
 

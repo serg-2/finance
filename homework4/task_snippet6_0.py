@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from joblib import load
 
-from task1 import load_df, load_tree, save_df
+from task_snippet_0 import load_df, load_tree, save_df
 from task_snippet_3_0 import load_tree_random
 
 #2.2) [Code Snippet 6] Defining new columns with Predictions in new_df: pred7..pred10

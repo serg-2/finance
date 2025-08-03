@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from task1 import load_df
+from task_snippet_0 import load_df
 from joblib import load
 
 from task1_figures import show_plt_snippet7
@@ -149,3 +149,7 @@ print(df_sim1_results[df_sim1_results.prediction.isin(['pred9_clf_second_best_ru
 
 # top 2-3 results
 print(df_sim1_results[df_sim1_results.prediction.isin(['pred8_clf_second_best_rule_84','pred7_clf_second_best'])])
+
+
+### Print result
+print(df_sim1_results[df_sim1_results.prediction.isin(['pred9_clf_second_best_rule_92'])].iloc[:, -2:])

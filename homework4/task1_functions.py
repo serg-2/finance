@@ -41,7 +41,7 @@ def temporal_split(df, min_date, max_date, train_prop=0.7, val_prop=0.15, test_p
 # and precision on TEST dataset (assuming there is df["split"] column with values 'train','validation','test'
 
 # returns 2 lists of features: PREDICTIONS and IS_CORRECT
-
+# POSSIBLE ERROR HERE!
 def get_predictions_correctness(new_df:pd.DataFrame, to_predict:str, debug_mode:bool = False):
   PREDICTIONS = [k for k in new_df.keys() if k.startswith('pred')]
   if debug_mode:

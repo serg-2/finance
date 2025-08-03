@@ -1,4 +1,4 @@
-from task1 import load_df
+from task_snippet_0 import load_df
 
 # Preload
 X_train_load = load_df("task_1_train_X.pickle")

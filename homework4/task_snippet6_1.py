@@ -1,4 +1,4 @@
-from task1 import load_df
+from task_snippet_0 import load_df
 from task1_functions import get_predictions_correctness
 from joblib import dump
 

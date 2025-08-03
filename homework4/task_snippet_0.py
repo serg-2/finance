@@ -1,5 +1,4 @@
 # IMPORTS
-import time
 import numpy as np
 import pandas as pd
 from joblib import dump, load
@@ -31,9 +30,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 
 # Original
-#CATEGORICAL = ['Month', 'Weekday', 'Ticker', 'ticker_type']
-CATEGORICAL = ['Month', 'Weekday', 'ticker_type']
-
+CATEGORICAL = ['Month', 'Weekday', 'Ticker', 'ticker_type']
 
 # All Supported Ta-lib indicators: https://github.com/TA-Lib/ta-lib-python/blob/master/docs/funcs.md
 TECHNICAL_INDICATORS = ['adx', 'adxr', 'apo', 'aroon_1','aroon_2', 'aroonosc',
@@ -65,6 +62,7 @@ def GET_TO_PREDICT(df_full: pd.DataFrame) -> list:
     return [g for g in df_full.keys() if (g.find('future')>=0)]
 
 def GET_DUMMIES(df: pd.DataFrame) -> list:
+    global CATEGORICAL
     # Generate dummy variables (no need for bool, let's have int32 instead)
     dummy_variables = pd.get_dummies(df[CATEGORICAL], dtype='int32')
     #print(dummy_variables.info())
@@ -89,6 +87,7 @@ def load_tree(filename: str) -> DecisionTreeClassifier:
     return load(filename)
 
 def create_step_1():
+    global CATEGORICAL
     # Load from 
     # https://drive.google.com/uc?id=1mb0ae2M5AouSDlqcUnIwaHq7avwGNrmB
 
@@ -130,50 +129,44 @@ def create_step_1():
 def load_step_1() -> pd.DataFrame:
     return load_df("step1.pickle")
 
-#create_step_1()
-#df = load_step_1()
+create_step_1()
+df = load_step_1()
 
 def create_step_2(df: pd.DataFrame) -> pd.DataFrame:
-
+    global CATEGORICAL
     # tickers, min-max date, count of daily observations
     #print(df.groupby(['Ticker'])['Date'].agg(['min','max','count']))
 
     #print(CATEGORICAL)
 
     # dummy variables are not generated from Date and numeric variables
-
-    # df.loc[:,'Month'] = df['Month'].dt.strftime('%B').astype('string')
-
     df.loc[:,'Month']= pd.to_datetime(df['Month'], format='%m').dt.strftime('%B')
 
-    df.loc[:,'Weekday'] = df['Weekday'].astype('string')
-    # .astype(str)
+    df.loc[:,'Weekday'] = df['Weekday'].astype('string')    # .astype(str)
 
-    # Task 1 -remove
     # define week of month
-    #df.loc[:,'wom'] = df.Date.apply(lambda d: (d.day-1)//7 + 1)
+    df.loc[:,'wom'] = df.Date.apply(lambda d: (d.day-1)//7 + 1)
     # convert to string
-    #df.loc[:,'wom'] = df.loc[:,'wom'].astype(str)
+    df.loc[:,'wom'] = df.loc[:,'wom'].astype(str)
 
     # check values for week-of-month (should be between 1 and 5)
     #print(df.wom.value_counts())
 
-    #Task 1 - remove
-    #df.loc[:,'month_wom'] = df.Month + '_w' + df.wom
+    df.loc[:,'month_wom'] = df.Month + '_w' + df.wom
 
-    # Task1 - remove
     # examples of encoding
-    #df.month_wom.value_counts()[0:2]
+    df.month_wom.value_counts()[0:2]
 
-    # Task1 - remove
     # del wom temp variable
-    #del df['wom']
+    del df['wom']
 
-    # Task 1 -remove
     # what are the categorical features?
-    #CATEGORICAL.append('month_wom')
-    #print(CATEGORICAL)
+    CATEGORICAL.append('month_wom')
+    
+    #TASK 1 HERE! Overriding categorical 
+    CATEGORICAL = ['Month', 'Weekday', 'ticker_type']
 
+    #print(CATEGORICAL)
 
     # Generate dummy variables (no need for bool, let's have int32 instead)
     dummy_variables = pd.get_dummies(df[CATEGORICAL], dtype='int32')
@@ -229,7 +222,7 @@ def load_step_2() -> pd.DataFrame:
     return load_df("step2.pickle")
 
 # MODELING ============================
-#create_step_2(df)
+create_step_2(df)
 
 new_df = load_step_2()
 #print(new_df.info())

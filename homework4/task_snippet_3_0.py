@@ -3,9 +3,6 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from joblib import dump, load
 
-from task1 import load_df
-
-
 def save_tree_random(clf: RandomForestClassifier, filename: str):
     dump(clf, filename)
 

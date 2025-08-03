@@ -1,5 +1,5 @@
 import pandas as pd
-from task1 import load_df, load_tree
+from task_snippet_0 import load_df, load_tree
 
 
 # Preload

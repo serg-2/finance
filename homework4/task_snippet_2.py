@@ -1,7 +1,7 @@
 import pandas as pd
 
 from task1_functions import clean_dataframe_from_inf_and_nan, get_predictions_correctness
-from task1 import load_tree, save_tree, GET_NUMERICAL,GET_DUMMIES,load_df,save_df
+from task_snippet_0 import load_tree, save_tree, GET_NUMERICAL,GET_DUMMIES,load_df,save_df
 from joblib import dump
 
 def load_task1_result() -> pd.DataFrame:
